@@ -2,10 +2,12 @@
 ## These functions set the value of the matrix, gets it values, set its invers and gets its inverse, respectively. 
 
 makeCacheMatrix <- function(x = matrix()) {
+    
     mat <- NULL
 
-    set <- function(y) {
-            mat<<- NULL
+    set <- function(y){
+        ##Assign to outside of function environment
+            mat<<- NULL            
             x <<- y
         }
         get <- function() x
@@ -14,7 +16,7 @@ makeCacheMatrix <- function(x = matrix()) {
         getinverse <- function() mat
         
         ##Return list of these functions
-        list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
+        list( set=set, get=get, setinverse=setinverse, getinverse=getinverse )
 }
 
 
@@ -23,13 +25,13 @@ makeCacheMatrix <- function(x = matrix()) {
 ##then the "solve" calculation is performed. If the solution has been perfomred previously, then the 
 ## stored inverse will be returned form the "mat" variable. 
 
-cacheSolve <- function(x, ...) {
+cacheSolve <- function( x, ...){
         mat<- x$getinverse()
-        if(!is.null(mat)) {
-                
-                return(mat)
+        if(!is.null(mat)) {                
+            return(mat)
         }
-        store <- x$get()
+    
+        store <-x$get()
 
         mat<- solve(store, ...)
 
